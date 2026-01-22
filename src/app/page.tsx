@@ -171,33 +171,33 @@ function HomeContent() {
       {/* Racing cars */}
       <div className="fixed bottom-24 left-0 w-full pointer-events-none">
         <div className="animate-race-right" style={{ animationDelay: "0s" }}>
-          <PixelCar color="#ff534e" />
+          <PixelCar color="var(--accent-secondary)" />
         </div>
       </div>
       <div className="fixed bottom-32 left-0 w-full pointer-events-none">
         <div className="animate-race-right-slow" style={{ animationDelay: "2s" }}>
-          <PixelCar color="#ffd700" />
+          <PixelCar color="var(--accent)" />
         </div>
       </div>
       <div className="fixed bottom-40 left-0 w-full pointer-events-none">
         <div className="animate-race-left">
-          <PixelCar color="#231a38" />
+          <PixelCar color="var(--bg-elevated)" />
         </div>
       </div>
 
       {/* Road */}
-      <div className="fixed bottom-0 left-0 right-0 h-20 bg-[#1c191c] pointer-events-none">
+      <div className="fixed bottom-0 left-0 right-0 h-20 bg-[var(--bg-surface)] pointer-events-none">
         {/* Road lines */}
         <div className="absolute top-1/2 -translate-y-1/2 w-[200%] flex animate-road">
           {[...Array(40)].map((_, i) => (
             <div key={i} className="flex-shrink-0">
-              <div className="w-8 h-2 bg-[#ffd700] mx-4" />
+              <div className="w-8 h-2 bg-[var(--accent)] mx-4" />
             </div>
           ))}
         </div>
         {/* Road edges */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-[#ff534e]" />
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#ff534e]" />
+        <div className="absolute top-0 left-0 right-0 h-2 bg-[var(--accent-secondary)]" />
+        <div className="absolute bottom-0 left-0 right-0 h-2 bg-[var(--accent-secondary)]" />
       </div>
 
       {/* Main content */}
@@ -226,13 +226,13 @@ function HomeContent() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex flex-wrap justify-center gap-4 mb-8"
         >
-          <span className="px-6 py-3 bg-[#ff534e] font-pixel text-[10px] text-white border-4 border-[#0f0f1a]">
+          <span className="px-6 py-3 bg-[var(--accent-secondary)] font-pixel text-[10px] text-white border-4 border-[var(--bg-dark)]">
             SHIP FASTER
           </span>
-          <span className="px-6 py-3 bg-[#ffd700] font-pixel text-[10px] text-black border-4 border-[#0f0f1a]">
+          <span className="px-6 py-3 bg-[var(--accent)] font-pixel text-[10px] text-black border-4 border-[var(--bg-dark)]">
             GET SEEN
           </span>
-          <span className="px-6 py-3 bg-[#231a38] font-pixel text-[10px] text-white border-4 border-[#ffd700]">
+          <span className="px-6 py-3 bg-[var(--bg-elevated)] font-pixel text-[10px] text-white border-4 border-[var(--accent)]">
             COMPOUND VALUE
           </span>
         </motion.div>

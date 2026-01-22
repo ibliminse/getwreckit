@@ -99,7 +99,7 @@ function WelcomeContent() {
           >
             <PixelStar
               size={Math.random() > 0.5 ? 4 : 2}
-              color={["#FFE66D", "#4ECDC4", "#FF6B6B", "#FFF"][Math.floor(Math.random() * 4)]}
+              color={["#ffd700", "#ff534e", "#231a38", "#FFF"][Math.floor(Math.random() * 4)]}
               delay={Math.random() * 2}
             />
           </div>

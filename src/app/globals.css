@@ -1,16 +1,29 @@
 @import "tailwindcss";
 
 :root {
+  /* Backgrounds (60%) */
   --bg-dark: #0f0f1a;
   --bg-surface: #1c191c;
-  --bg-card: #231a38;
-  --text-primary: #ededed;
+  --bg-elevated: #231a38;
+
+  /* Text */
+  --text-primary: #fafafa;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
+
+  /* Primary Accent - Gold (7%) */
   --accent: #ffd700;
   --accent-hover: #e6c200;
+  --accent-glow: rgba(255, 215, 0, 0.3);
+
+  /* Secondary Accent - Coral (3%) */
   --accent-secondary: #ff534e;
+  --accent-secondary-hover: #e64a45;
+  --accent-secondary-glow: rgba(255, 83, 78, 0.3);
+
+  /* Borders */
   --border: #231a38;
+  --border-subtle: rgba(255, 215, 0, 0.1);
 }
 
 * {
