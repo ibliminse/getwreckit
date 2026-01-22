@@ -40,6 +40,16 @@ function PixelStar({ size = 8, color = "#FFE66D", delay = 0 }: { size?: number; 
   );
 }
 
+// Floating memes configuration
+const FLOATING_MEMES = [
+  { src: "https://wreckitgames.xyz/memes/webp/wreck-it.webp", className: "animate-float-1", position: { top: "15%", left: "5%" }, size: 100 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-1.webp", className: "animate-float-2", position: { top: "20%", right: "8%" }, size: 90 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-3.webp", className: "animate-float-3", position: { bottom: "35%", left: "3%" }, size: 80 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-5.webp", className: "animate-float-1", position: { bottom: "40%", right: "5%" }, size: 85 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-2.webp", className: "animate-float-2", position: { top: "45%", left: "8%" }, size: 75 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-4.webp", className: "animate-float-3", position: { top: "50%", right: "3%" }, size: 80 },
+];
+
 function HomeContent() {
   const searchParams = useSearchParams();
   const referredBy = searchParams.get("ref") || "";
@@ -101,6 +111,29 @@ function HomeContent() {
               delay={Math.random() * 2}
             />
           </div>
+        ))}
+      </div>
+
+      {/* Floating memes */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden hidden md:block">
+        {FLOATING_MEMES.map((meme, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.9, scale: 1 }}
+            transition={{ duration: 0.5, delay: i * 0.2 }}
+            className={`absolute ${meme.className}`}
+            style={{ ...meme.position }}
+          >
+            <img
+              src={meme.src}
+              alt=""
+              width={meme.size}
+              height={meme.size}
+              className="rounded-lg opacity-80 hover:opacity-100 transition-opacity"
+              style={{ filter: "drop-shadow(0 0 10px rgba(78, 205, 196, 0.3))" }}
+            />
+          </motion.div>
         ))}
       </div>
 
