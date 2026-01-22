@@ -1,5 +1,26 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Press_Start_2P, Inter, Space_Mono } from "next/font/google";
+
+const pressStart2P = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pixel",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   themeColor: "#0a0a0f",
@@ -30,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className={`${pressStart2P.variable} ${inter.variable} ${spaceMono.variable} antialiased`}>
         {children}
       </body>
     </html>
