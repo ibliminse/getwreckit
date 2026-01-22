@@ -102,6 +102,14 @@ function HomeContent() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden scanlines">
+      {/* Vignette/gradient background */}
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at center, transparent 0%, rgba(15, 15, 26, 0.4) 50%, rgba(15, 15, 26, 0.9) 100%)"
+        }}
+      />
+
       {/* Stars background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {[...Array(20)].map((_, i) => (
@@ -232,7 +240,7 @@ function HomeContent() {
           <span className="px-6 py-3 bg-[var(--accent)] font-pixel text-[10px] text-black border-4 border-[var(--bg-dark)]">
             GET SEEN
           </span>
-          <span className="px-6 py-3 bg-[var(--bg-elevated)] font-pixel text-[10px] text-white border-4 border-[var(--accent)]">
+          <span className="px-6 py-3 bg-[var(--bg-elevated)] font-pixel text-[10px] text-[var(--accent)] border-4 border-[var(--accent)]">
             COMPOUND VALUE
           </span>
         </motion.div>
@@ -320,7 +328,7 @@ function HomeContent() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 bg-[var(--bg-surface)] border-2 border-[var(--border)] font-pixel text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors"
+            className="px-4 py-2 bg-[var(--bg-surface)] border-2 border-[var(--border)] font-pixel text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] hover:shadow-[0_0_20px_var(--accent-glow)] transition-all duration-200"
           >
             {link.label}
           </a>
