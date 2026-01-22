@@ -40,14 +40,22 @@ function PixelStar({ size = 8, color = "#FFE66D", delay = 0 }: { size?: number; 
   );
 }
 
-// Floating memes configuration
-const FLOATING_MEMES = [
+// Floating memes configuration - desktop positions
+const FLOATING_MEMES_DESKTOP = [
   { src: "https://wreckitgames.xyz/memes/webp/wreck-it.webp", className: "animate-float-1", position: { top: "15%", left: "5%" }, size: 100 },
   { src: "https://wreckitgames.xyz/memes/webp/ralph-1.webp", className: "animate-float-2", position: { top: "20%", right: "8%" }, size: 90 },
   { src: "https://wreckitgames.xyz/memes/webp/ralph-3.webp", className: "animate-float-3", position: { bottom: "35%", left: "3%" }, size: 80 },
   { src: "https://wreckitgames.xyz/memes/webp/ralph-5.webp", className: "animate-float-1", position: { bottom: "40%", right: "5%" }, size: 85 },
   { src: "https://wreckitgames.xyz/memes/webp/ralph-2.webp", className: "animate-float-2", position: { top: "45%", left: "8%" }, size: 75 },
   { src: "https://wreckitgames.xyz/memes/webp/ralph-4.webp", className: "animate-float-3", position: { top: "50%", right: "3%" }, size: 80 },
+];
+
+// Floating memes configuration - mobile positions (corners, smaller)
+const FLOATING_MEMES_MOBILE = [
+  { src: "https://wreckitgames.xyz/memes/webp/wreck-it.webp", className: "animate-float-1", position: { top: "8%", left: "5%" }, size: 50 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-1.webp", className: "animate-float-2", position: { top: "8%", right: "5%" }, size: 50 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-3.webp", className: "animate-float-3", position: { bottom: "18%", left: "5%" }, size: 45 },
+  { src: "https://wreckitgames.xyz/memes/webp/ralph-5.webp", className: "animate-float-1", position: { bottom: "18%", right: "5%" }, size: 45 },
 ];
 
 function HomeContent() {
@@ -114,9 +122,9 @@ function HomeContent() {
         ))}
       </div>
 
-      {/* Floating memes */}
+      {/* Floating memes - Desktop */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden hidden md:block">
-        {FLOATING_MEMES.map((meme, i) => (
+        {FLOATING_MEMES_DESKTOP.map((meme, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0.8 }}
@@ -130,8 +138,31 @@ function HomeContent() {
               alt=""
               width={meme.size}
               height={meme.size}
-              className="rounded-lg opacity-80 hover:opacity-100 transition-opacity"
+              className="rounded-lg opacity-80"
               style={{ filter: "drop-shadow(0 0 10px rgba(255, 215, 0, 0.3))" }}
+            />
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Floating memes - Mobile */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden md:hidden">
+        {FLOATING_MEMES_MOBILE.map((meme, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.7, scale: 1 }}
+            transition={{ duration: 0.5, delay: i * 0.15 }}
+            className={`absolute ${meme.className}`}
+            style={{ ...meme.position }}
+          >
+            <img
+              src={meme.src}
+              alt=""
+              width={meme.size}
+              height={meme.size}
+              className="rounded-md opacity-70"
+              style={{ filter: "drop-shadow(0 0 8px rgba(255, 215, 0, 0.2))" }}
             />
           </motion.div>
         ))}
