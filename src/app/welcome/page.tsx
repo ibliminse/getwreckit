@@ -4,6 +4,23 @@ import { useState, useEffect, useCallback, Suspense } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 
+// Pixel star component
+function PixelStar({ size = 8, color = "#FFE66D", delay = 0 }: { size?: number; color?: string; delay?: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0.3, 1, 0.3] }}
+      transition={{ duration: 2, repeat: Infinity, delay }}
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: color,
+        imageRendering: "pixelated",
+      }}
+    />
+  );
+}
+
 function WelcomeContent() {
   const searchParams = useSearchParams();
   const referralCode = searchParams.get("ref") || "";
@@ -16,7 +33,6 @@ function WelcomeContent() {
 
   const referralLink = `https://getwreckit.xyz?ref=${referralCode}`;
 
-  // Fetch latest status
   const fetchStatus = useCallback(async () => {
     if (!referralCode) return;
     try {
@@ -34,7 +50,6 @@ function WelcomeContent() {
 
   useEffect(() => {
     fetchStatus();
-    // Poll for updates every 30 seconds
     const interval = setInterval(fetchStatus, 30000);
     return () => clearInterval(interval);
   }, [fetchStatus]);
@@ -45,7 +60,6 @@ function WelcomeContent() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback
       const input = document.createElement("input");
       input.value = referralLink;
       document.body.appendChild(input);
@@ -71,10 +85,25 @@ function WelcomeContent() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6">
-      {/* Subtle background glow */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--accent)] rounded-full blur-[200px] opacity-[0.07]" />
+    <main className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden scanlines">
+      {/* Stars background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 70}%`,
+            }}
+          >
+            <PixelStar
+              size={Math.random() > 0.5 ? 4 : 2}
+              color={["#FFE66D", "#4ECDC4", "#FF6B6B", "#FFF"][Math.floor(Math.random() * 4)]}
+              delay={Math.random() * 2}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="relative z-10 w-full max-w-md text-center">
@@ -82,66 +111,45 @@ function WelcomeContent() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
+          transition={{ duration: 0.5 }}
+          className="mb-6"
         >
-          <span
-            className="text-2xl font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            <span className="text-[var(--accent)]">WRECKIT</span>
-          </span>
+          <h1 className="text-2xl md:text-3xl font-pixel text-[var(--accent)] animate-glow">
+            WRECKIT
+          </h1>
         </motion.div>
 
         {/* Success message */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-6"
         >
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--accent)]/10 flex items-center justify-center">
-            <svg
-              className="w-8 h-8 text-[var(--accent)]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
+          <div className="pixel-box p-4 inline-block mb-4">
+            <span className="font-pixel text-[24px] text-[var(--accent-secondary)]">✓</span>
           </div>
-          <h1
-            className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            You're on the list!
-          </h1>
+          <h2 className="font-pixel text-sm md:text-base text-[var(--text-primary)]">
+            YOU'RE IN!
+          </h2>
         </motion.div>
 
         {/* Position display */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-8 p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)]"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-8 pixel-box p-6"
         >
-          <div className="text-sm text-[var(--text-muted)] mb-1">
-            Your position
+          <div className="font-pixel text-[8px] text-[var(--text-muted)] mb-2">
+            YOUR POSITION
           </div>
-          <div
-            className="text-5xl md:text-6xl font-bold text-[var(--accent)] mb-2"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
+          <div className="font-pixel text-4xl md:text-5xl text-[var(--accent-yellow)] mb-2">
             #{position.toLocaleString()}
           </div>
           {totalCount > 0 && (
-            <div className="text-sm text-[var(--text-muted)]">
-              out of {totalCount.toLocaleString()} developers
+            <div className="font-pixel text-[8px] text-[var(--text-muted)]">
+              OUT OF {totalCount.toLocaleString()} PLAYERS
             </div>
           )}
         </motion.div>
@@ -150,24 +158,21 @@ function WelcomeContent() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-6"
         >
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-2">
-            Move up the list
-          </h2>
-          <p className="text-sm text-[var(--text-secondary)] mb-4">
-            Each referral moves you up{" "}
-            <span className="text-[var(--accent)] font-semibold">100 spots</span>
+          <h3 className="font-pixel text-[10px] text-[var(--text-primary)] mb-2">
+            LEVEL UP YOUR SPOT
+          </h3>
+          <p className="font-pixel text-[8px] text-[var(--text-secondary)] mb-4">
+            EACH REFERRAL = <span className="text-[var(--accent)]">+100 SPOTS</span>
           </p>
 
           {referralCount > 0 && (
-            <div className="text-sm text-[var(--text-secondary)] mb-4">
-              You've referred{" "}
-              <span className="text-[var(--accent)] font-semibold">
-                {referralCount}
-              </span>{" "}
-              {referralCount === 1 ? "person" : "people"}
+            <div className="pixel-box p-3 mb-4 inline-block">
+              <span className="font-pixel text-[8px] text-[var(--accent-secondary)]">
+                {referralCount} REFERRAL{referralCount !== 1 ? "S" : ""}
+              </span>
             </div>
           )}
 
@@ -175,53 +180,21 @@ function WelcomeContent() {
           <div className="flex flex-col gap-3">
             <button
               onClick={shareTwitter}
-              className="w-full py-3 px-4 rounded-xl bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white font-medium transition-colors flex items-center justify-center gap-2"
+              className="pixel-btn w-full flex items-center justify-center gap-2"
+              style={{ background: "#1DA1F2" }}
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg>
-              Share on Twitter
+              SHARE
             </button>
 
             <button
               onClick={copyLink}
-              className="w-full py-3 px-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-[var(--text-primary)] font-medium transition-colors flex items-center justify-center gap-2"
+              className="pixel-btn w-full"
+              style={{ background: "var(--bg-surface)", border: "4px solid var(--border)" }}
             >
-              {copied ? (
-                <>
-                  <svg
-                    className="w-5 h-5 text-green-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  Copied!
-                </>
-              ) : (
-                <>
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                    />
-                  </svg>
-                  Copy referral link
-                </>
-              )}
+              {copied ? "COPIED!" : "COPY LINK"}
             </button>
           </div>
         </motion.div>
@@ -230,10 +203,12 @@ function WelcomeContent() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-xs text-[var(--text-muted)] break-all p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)]"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="pixel-box p-3"
         >
-          {referralLink}
+          <p className="font-pixel text-[6px] text-[var(--text-muted)] break-all">
+            {referralLink}
+          </p>
         </motion.div>
       </div>
 
@@ -242,32 +217,23 @@ function WelcomeContent() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-6 left-0 right-0 flex justify-center gap-2 px-4"
+        className="fixed top-4 left-0 right-0 flex justify-center gap-2 px-4 z-20"
       >
-        <a
-          href="https://wreckitlore.xyz"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
-        >
-          Token Data
-        </a>
-        <a
-          href="https://wreckitgames.xyz"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
-        >
-          Games
-        </a>
-        <a
-          href="https://x.com/wreckitcc"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
-        >
-          Twitter
-        </a>
+        {[
+          { label: "LORE", href: "https://wreckitlore.xyz" },
+          { label: "GAMES", href: "https://wreckitgames.xyz" },
+          { label: "TWITTER", href: "https://x.com/wreckitcc" },
+        ].map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pixel-box px-3 py-2 font-pixel text-[8px] text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+          >
+            {link.label}
+          </a>
+        ))}
       </motion.nav>
     </main>
   );
@@ -275,11 +241,15 @@ function WelcomeContent() {
 
 export default function Welcome() {
   return (
-    <Suspense fallback={
-      <main className="min-h-screen flex items-center justify-center bg-[var(--bg-dark)]">
-        <div className="w-8 h-8 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
-      </main>
-    }>
+    <Suspense
+      fallback={
+        <main className="min-h-screen flex items-center justify-center bg-[var(--bg-dark)]">
+          <div className="font-pixel text-[var(--accent)] animate-pixel-blink">
+            LOADING...
+          </div>
+        </main>
+      }
+    >
       <WelcomeContent />
     </Suspense>
   );

@@ -1,16 +1,18 @@
 @import "tailwindcss";
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-  --bg-dark: #0a0a0f;
-  --bg-surface: #111118;
-  --text-primary: #ffffff;
+  --bg-dark: #0a0a0a;
+  --bg-surface: #1a1a1a;
+  --text-primary: #ededed;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
-  --accent: #a855f7;
-  --accent-hover: #9333ea;
-  --border: #27272a;
-  --font-display: 'Clash Display', sans-serif;
+  --accent: #ff6b6b;
+  --accent-hover: #ff5252;
+  --accent-secondary: #4ecdc4;
+  --accent-yellow: #ffe66d;
+  --border: #333333;
+  --font-pixel: 'Press Start 2P', cursive;
 }
 
 * {
@@ -46,11 +48,162 @@ input:focus {
   outline: none;
 }
 
-@keyframes pulse-subtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+/* Pixel font class */
+.font-pixel {
+  font-family: 'Press Start 2P', cursive;
 }
 
-.animate-pulse-subtle {
-  animation: pulse-subtle 2s ease-in-out infinite;
+/* Racing car animation */
+@keyframes race-right {
+  0% { transform: translateX(-100px); }
+  100% { transform: translateX(calc(100vw + 100px)); }
+}
+
+@keyframes race-left {
+  0% { transform: translateX(calc(100vw + 100px)); }
+  100% { transform: translateX(-100px); }
+}
+
+.animate-race-right {
+  animation: race-right 8s linear infinite;
+}
+
+.animate-race-right-slow {
+  animation: race-right 12s linear infinite;
+}
+
+.animate-race-left {
+  animation: race-left 10s linear infinite;
+}
+
+/* Road stripe animation */
+@keyframes road-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-64px); }
+}
+
+.animate-road {
+  animation: road-move 0.5s linear infinite;
+}
+
+/* Pixel blink */
+@keyframes pixel-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-pixel-blink {
+  animation: pixel-blink 1s step-end infinite;
+}
+
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
+  }
+  50% {
+    text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
+  }
+}
+
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Scanline effect */
+.scanlines {
+  position: relative;
+}
+
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+/* Pixel button style */
+.pixel-btn {
+  position: relative;
+  background: var(--accent);
+  border: none;
+  padding: 16px 32px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: white;
+  cursor: pointer;
+  image-rendering: pixelated;
+  box-shadow:
+    4px 4px 0 0 #000,
+    inset -4px -4px 0 0 rgba(0,0,0,0.3),
+    inset 4px 4px 0 0 rgba(255,255,255,0.2);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.pixel-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow:
+    2px 2px 0 0 #000,
+    inset -4px -4px 0 0 rgba(0,0,0,0.3),
+    inset 4px 4px 0 0 rgba(255,255,255,0.2);
+}
+
+.pixel-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow:
+    0 0 0 0 #000,
+    inset -4px -4px 0 0 rgba(0,0,0,0.3),
+    inset 4px 4px 0 0 rgba(255,255,255,0.2);
+}
+
+/* Pixel input */
+.pixel-input {
+  background: var(--bg-surface);
+  border: 4px solid var(--border);
+  padding: 16px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: var(--text-primary);
+  box-shadow: inset 4px 4px 0 0 rgba(0,0,0,0.5);
+}
+
+.pixel-input:focus {
+  border-color: var(--accent);
+}
+
+/* Pixel border box */
+.pixel-box {
+  background: var(--bg-surface);
+  border: 4px solid var(--border);
+  box-shadow:
+    8px 8px 0 0 rgba(0,0,0,0.5),
+    inset -4px -4px 0 0 rgba(0,0,0,0.2),
+    inset 4px 4px 0 0 rgba(255,255,255,0.05);
+}
+
+/* Star twinkle */
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.8); }
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* Bounce */
+@keyframes pixel-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-pixel-bounce {
+  animation: pixel-bounce 0.5s ease-in-out infinite;
 }
