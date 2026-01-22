@@ -143,27 +143,28 @@ function HomeContent() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6"
+          className="mb-8"
         >
           <h1
-            className="text-3xl md:text-5xl font-pixel text-[var(--accent)] animate-glow tracking-wider"
+            className="text-5xl md:text-7xl lg:text-8xl font-pixel text-[var(--accent)] tracking-wider"
+            style={{
+              textShadow: "0 0 20px var(--accent), 0 0 40px var(--accent), 0 0 60px var(--accent)",
+            }}
           >
             WRECKIT
           </h1>
         </motion.div>
 
-        {/* Urgency badge */}
+        {/* Feature badges */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="inline-block mb-6"
+          className="flex flex-wrap justify-center gap-2 mb-8"
         >
-          <div className="pixel-box px-4 py-2">
-            <span className="font-pixel text-[8px] md:text-[10px] text-[var(--accent-yellow)]">
-              FIRST 1,000 GET LIFETIME FREE ACCESS
-            </span>
-          </div>
+          <span className="px-4 py-2 bg-[#ff6b6b] font-pixel text-xs text-white">SHIP FASTER</span>
+          <span className="px-4 py-2 bg-[#ffe66d] font-pixel text-xs text-black">GET SEEN</span>
+          <span className="px-4 py-2 bg-[#a8e6cf] font-pixel text-xs text-black">COMPOUND VALUE</span>
         </motion.div>
 
         {/* Headline */}
@@ -171,9 +172,9 @@ function HomeContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="font-pixel text-lg md:text-2xl text-[var(--text-primary)] mb-4 leading-relaxed"
+          className="text-2xl md:text-4xl font-semibold text-[var(--text-primary)] mb-4 leading-snug"
         >
-          FREE AI CODING TOOLS
+          Free AI coding tools that ship.
         </motion.h2>
 
         {/* Subheadline */}
@@ -181,10 +182,10 @@ function HomeContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="font-pixel text-[8px] md:text-[10px] text-[var(--text-secondary)] mb-8 leading-loose"
+          className="text-base md:text-lg text-[var(--text-secondary)] mb-8"
         >
           Built by AI. Powered by{" "}
-          <span className="text-[var(--accent)]">$WRECKIT</span>
+          <span className="text-[var(--accent)] font-semibold">$WRECKIT</span>.
         </motion.p>
 
         {/* Email form */}
@@ -217,17 +218,17 @@ function HomeContent() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="font-pixel text-[8px] text-[var(--text-muted)]"
+          className="text-sm text-[var(--text-muted)]"
         >
           {waitlistCount !== null && waitlistCount > 0 ? (
             <>
-              <span className="text-[var(--accent-secondary)]">
+              <span className="text-[var(--accent)] font-semibold">
                 {waitlistCount.toLocaleString()}
               </span>{" "}
-              PLAYERS IN QUEUE
+              developers in queue
             </>
           ) : (
-            "BE FIRST IN LINE"
+            "Be first in line"
           )}
         </motion.div>
       </div>
@@ -237,7 +238,7 @@ function HomeContent() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-4 left-0 right-0 flex justify-center gap-2 px-4 z-20"
+        className="fixed top-4 left-0 right-0 flex justify-center gap-3 px-4 z-20"
       >
         {[
           { label: "LORE", href: "https://wreckitlore.xyz" },
@@ -249,7 +250,7 @@ function HomeContent() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="pixel-box px-3 py-2 font-pixel text-[8px] text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+            className="px-4 py-2 bg-[var(--bg-surface)] border-2 border-[var(--border)] font-pixel text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors"
           >
             {link.label}
           </a>
