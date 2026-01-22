@@ -160,11 +160,26 @@ function HomeContent() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 mb-8"
+          className="flex flex-wrap justify-center gap-3 mb-8"
         >
-          <span className="px-4 py-2 bg-[#ff6b6b] font-pixel text-xs text-white">SHIP FASTER</span>
-          <span className="px-4 py-2 bg-[#ffe66d] font-pixel text-xs text-black">GET SEEN</span>
-          <span className="px-4 py-2 bg-[#a8e6cf] font-pixel text-xs text-black">COMPOUND VALUE</span>
+          <span
+            className="px-5 py-3 bg-[#ff6b6b] font-pixel text-[10px] text-white border-b-4 border-[#cc5555]"
+            style={{ boxShadow: "0 4px 0 #cc5555, 0 6px 20px rgba(255,107,107,0.4)" }}
+          >
+            SHIP FASTER
+          </span>
+          <span
+            className="px-5 py-3 bg-[#ffe66d] font-pixel text-[10px] text-black border-b-4 border-[#ccb855]"
+            style={{ boxShadow: "0 4px 0 #ccb855, 0 6px 20px rgba(255,230,109,0.4)" }}
+          >
+            GET SEEN
+          </span>
+          <span
+            className="px-5 py-3 bg-[#a8e6cf] font-pixel text-[10px] text-black border-b-4 border-[#86b8a5]"
+            style={{ boxShadow: "0 4px 0 #86b8a5, 0 6px 20px rgba(168,230,207,0.4)" }}
+          >
+            COMPOUND VALUE
+          </span>
         </motion.div>
 
         {/* Headline */}
