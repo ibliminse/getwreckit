@@ -137,18 +137,18 @@ function HomeContent() {
         </motion.p>
       </div>
 
-      {/* Footer links */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        className="fixed bottom-8 left-0 right-0 flex justify-center gap-6 text-sm text-[var(--text-muted)]"
+      {/* Navigation tabs */}
+      <motion.nav
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-6 left-0 right-0 flex justify-center gap-2 px-4"
       >
         <a
           href="https://wreckitlore.xyz"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-[var(--text-secondary)] transition-colors"
+          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
         >
           Token Data
         </a>
@@ -156,7 +156,7 @@ function HomeContent() {
           href="https://wreckitgames.xyz"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-[var(--text-secondary)] transition-colors"
+          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
         >
           Games
         </a>
@@ -164,11 +164,11 @@ function HomeContent() {
           href="https://x.com/wreckitcc"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-[var(--text-secondary)] transition-colors"
+          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
         >
           Twitter
         </a>
-      </motion.div>
+      </motion.nav>
     </main>
   );
 }
