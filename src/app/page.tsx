@@ -107,7 +107,7 @@ function HomeContent() {
           >
             <PixelStar
               size={Math.random() > 0.5 ? 4 : 2}
-              color={["#FFE66D", "#4ECDC4", "#FF6B6B", "#FFF"][Math.floor(Math.random() * 4)]}
+              color={["#ffd700", "#ff534e", "#231a38", "#FFF"][Math.floor(Math.random() * 4)]}
               delay={Math.random() * 2}
             />
           </div>
@@ -131,7 +131,7 @@ function HomeContent() {
               width={meme.size}
               height={meme.size}
               className="rounded-lg opacity-80 hover:opacity-100 transition-opacity"
-              style={{ filter: "drop-shadow(0 0 10px rgba(78, 205, 196, 0.3))" }}
+              style={{ filter: "drop-shadow(0 0 10px rgba(255, 215, 0, 0.3))" }}
             />
           </motion.div>
         ))}
@@ -140,33 +140,33 @@ function HomeContent() {
       {/* Racing cars */}
       <div className="fixed bottom-24 left-0 w-full pointer-events-none">
         <div className="animate-race-right" style={{ animationDelay: "0s" }}>
-          <PixelCar color="#FF6B6B" />
+          <PixelCar color="#ff534e" />
         </div>
       </div>
       <div className="fixed bottom-32 left-0 w-full pointer-events-none">
         <div className="animate-race-right-slow" style={{ animationDelay: "2s" }}>
-          <PixelCar color="#4ECDC4" />
+          <PixelCar color="#ffd700" />
         </div>
       </div>
       <div className="fixed bottom-40 left-0 w-full pointer-events-none">
         <div className="animate-race-left">
-          <PixelCar color="#FFE66D" />
+          <PixelCar color="#231a38" />
         </div>
       </div>
 
       {/* Road */}
-      <div className="fixed bottom-0 left-0 right-0 h-20 bg-[#333] pointer-events-none">
+      <div className="fixed bottom-0 left-0 right-0 h-20 bg-[#1c191c] pointer-events-none">
         {/* Road lines */}
         <div className="absolute top-1/2 -translate-y-1/2 w-[200%] flex animate-road">
           {[...Array(40)].map((_, i) => (
             <div key={i} className="flex-shrink-0">
-              <div className="w-8 h-2 bg-[#FFE66D] mx-4" />
+              <div className="w-8 h-2 bg-[#ffd700] mx-4" />
             </div>
           ))}
         </div>
         {/* Road edges */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-[#FF6B6B]" />
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#FF6B6B]" />
+        <div className="absolute top-0 left-0 right-0 h-2 bg-[#ff534e]" />
+        <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#ff534e]" />
       </div>
 
       {/* Main content */}
@@ -195,13 +195,13 @@ function HomeContent() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex flex-wrap justify-center gap-4 mb-8"
         >
-          <span className="px-6 py-3 bg-[#e74c3c] font-pixel text-[10px] text-white border-4 border-[#1a1a1a]">
+          <span className="px-6 py-3 bg-[#ff534e] font-pixel text-[10px] text-white border-4 border-[#0f0f1a]">
             SHIP FASTER
           </span>
-          <span className="px-6 py-3 bg-[#f1c40f] font-pixel text-[10px] text-black border-4 border-[#1a1a1a]">
+          <span className="px-6 py-3 bg-[#ffd700] font-pixel text-[10px] text-black border-4 border-[#0f0f1a]">
             GET SEEN
           </span>
-          <span className="px-6 py-3 bg-[#2ecc71] font-pixel text-[10px] text-black border-4 border-[#1a1a1a]">
+          <span className="px-6 py-3 bg-[#231a38] font-pixel text-[10px] text-white border-4 border-[#ffd700]">
             COMPOUND VALUE
           </span>
         </motion.div>
