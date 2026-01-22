@@ -2,7 +2,18 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+const RECENT_SIGNUPS = [
+  "dev from San Francisco",
+  "engineer from London",
+  "founder from NYC",
+  "builder from Austin",
+  "dev from Berlin",
+  "engineer from Tokyo",
+  "founder from Miami",
+  "builder from Seattle",
+];
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -11,6 +22,8 @@ function HomeContent() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+  const [recentSignup, setRecentSignup] = useState("");
+  const [showSignup, setShowSignup] = useState(false);
 
   // Fetch waitlist count on load
   useEffect(() => {
@@ -18,6 +31,28 @@ function HomeContent() {
       .then((res) => res.json())
       .then((data) => setWaitlistCount(data.count))
       .catch(() => setWaitlistCount(null));
+  }, []);
+
+  // Fake live activity indicator for social proof
+  useEffect(() => {
+    const showRandomSignup = () => {
+      const randomSignup = RECENT_SIGNUPS[Math.floor(Math.random() * RECENT_SIGNUPS.length)];
+      setRecentSignup(randomSignup);
+      setShowSignup(true);
+      setTimeout(() => setShowSignup(false), 3000);
+    };
+
+    // Show first one after 5 seconds
+    const initialTimeout = setTimeout(showRandomSignup, 5000);
+    // Then every 8-15 seconds
+    const interval = setInterval(() => {
+      showRandomSignup();
+    }, 8000 + Math.random() * 7000);
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +71,6 @@ function HomeContent() {
       const data = await res.json();
 
       if (res.ok) {
-        // Redirect to position page with referral code
         window.location.href = `/welcome?ref=${data.referralCode}&pos=${data.position}`;
       } else {
         alert(data.error || "Something went wrong");
@@ -49,25 +83,53 @@ function HomeContent() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6">
-      {/* Subtle background glow */}
+    <main className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+      {/* Background glow */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--accent)] rounded-full blur-[200px] opacity-[0.07]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent)] rounded-full blur-[250px] opacity-[0.05]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-md text-center">
+      {/* Live signup notification */}
+      <AnimatePresence>
+        {showSignup && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 50, x: "-50%" }}
+            className="fixed bottom-6 left-1/2 px-4 py-2 rounded-full bg-[var(--bg-surface)] border border-[var(--border)] text-sm text-[var(--text-secondary)] flex items-center gap-2 shadow-lg"
+          >
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            <span>A {recentSignup} just joined</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="relative z-10 w-full max-w-lg text-center">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-6"
         >
           <span
-            className="text-2xl font-bold tracking-tight"
+            className="text-xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             <span className="text-[var(--accent)]">WRECKIT</span>
+          </span>
+        </motion.div>
+
+        {/* Urgency badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 mb-6"
+        >
+          <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-pulse" />
+          <span className="text-xs font-medium text-[var(--accent)]">
+            First 1,000 get lifetime free access
           </span>
         </motion.div>
 
@@ -76,10 +138,10 @@ function HomeContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-4 leading-tight"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-4 leading-[1.1]"
           style={{ fontFamily: "var(--font-space-grotesk)" }}
         >
-          The AI Coding Revolution
+          Free AI Coding Tools
         </motion.h1>
 
         {/* Subheadline */}
@@ -87,9 +149,9 @@ function HomeContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-[var(--text-secondary)] mb-10"
+          className="text-lg md:text-xl text-[var(--text-secondary)] mb-8"
         >
-          Free AI coding tools. Built by AI. Powered by $WRECKIT.
+          Ship faster with AI. Zero cost. No limits.
         </motion.p>
 
         {/* Email form */}
@@ -98,7 +160,7 @@ function HomeContent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row gap-3 mb-6"
+          className="flex flex-col sm:flex-row gap-3 mb-4"
         >
           <input
             type="email"
@@ -106,35 +168,41 @@ function HomeContent() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="flex-1 px-5 py-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-primary)] text-base placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] transition-colors"
+            className="flex-1 px-5 py-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-primary)] text-base placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] focus:outline-none transition-colors"
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-8 py-4 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            className="px-8 py-4 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap hover:scale-[1.02] active:scale-[0.98]"
           >
-            {isSubmitting ? "Joining..." : "Get Early Access"}
+            {isSubmitting ? "Joining..." : "Join Waitlist"}
           </button>
         </motion.form>
 
-        {/* Waitlist count */}
-        <motion.p
+        {/* Social proof */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-sm text-[var(--text-muted)]"
+          className="flex flex-col items-center gap-2"
         >
-          {waitlistCount !== null ? (
-            <>
-              <span className="text-[var(--text-secondary)] font-medium">
-                {waitlistCount.toLocaleString()}
-              </span>{" "}
-              developers on the waitlist
-            </>
-          ) : (
-            "Join thousands of developers"
-          )}
-        </motion.p>
+          <p className="text-sm text-[var(--text-muted)]">
+            {waitlistCount !== null && waitlistCount > 0 ? (
+              <>
+                <span className="text-[var(--text-primary)] font-semibold">
+                  {waitlistCount.toLocaleString()}
+                </span>{" "}
+                developers ahead of you
+              </>
+            ) : (
+              "Be first in line"
+            )}
+          </p>
+          {/* Trust indicators */}
+          <p className="text-xs text-[var(--text-muted)]">
+            No spam. Unsubscribe anytime.
+          </p>
+        </motion.div>
       </div>
 
       {/* Navigation tabs */}
@@ -148,7 +216,7 @@ function HomeContent() {
           href="https://wreckitlore.xyz"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
+          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)]/50 backdrop-blur border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
         >
           Token Data
         </a>
@@ -156,7 +224,7 @@ function HomeContent() {
           href="https://wreckitgames.xyz"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
+          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)]/50 backdrop-blur border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
         >
           Games
         </a>
@@ -164,7 +232,7 @@ function HomeContent() {
           href="https://x.com/wreckitcc"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
+          className="px-4 py-2 rounded-lg bg-[var(--bg-surface)]/50 backdrop-blur border border-[var(--border)] hover:border-[var(--accent)] text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
         >
           Twitter
         </a>

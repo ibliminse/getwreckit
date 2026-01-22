@@ -58,9 +58,12 @@ function WelcomeContent() {
   };
 
   const shareTwitter = () => {
-    const text = encodeURIComponent(
-      "I just joined the WRECKIT waitlist for early access to free AI coding tools. Join me:"
-    );
+    const messages = [
+      `I'm #${position} on the WRECKIT waitlist.\n\nFree AI coding tools are coming. First 1,000 get lifetime access.\n\nDon't sleep on this:`,
+      `Just secured my spot for free AI coding tools.\n\nWRECKIT is giving the first 1,000 users lifetime access.\n\nI'm #${position} in line. Get ahead of me:`,
+      `Devs are racing to get on the WRECKIT waitlist.\n\nFree AI coding tools. No catch.\n\nI'm #${position}. See you at the top:`,
+    ];
+    const text = encodeURIComponent(messages[Math.floor(Math.random() * messages.length)]);
     window.open(
       `https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(referralLink)}`,
       "_blank"
