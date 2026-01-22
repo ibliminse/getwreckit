@@ -18,13 +18,13 @@ function PixelCar({ color, style }: { color: string; style?: React.CSSProperties
       <rect x="3" y="6" width="2" height="2" fill="#333" />
       <rect x="11" y="6" width="2" height="2" fill="#333" />
       {/* Headlights */}
-      <rect x="14" y="3" width="1" height="2" fill="#FFE66D" />
+      <rect x="14" y="3" width="1" height="2" fill="#ffd700" />
     </svg>
   );
 }
 
 // Pixel star component
-function PixelStar({ size = 8, color = "#FFE66D", delay = 0 }: { size?: number; color?: string; delay?: number }) {
+function PixelStar({ size = 8, color = "#ffd700", delay = 0 }: { size?: number; color?: string; delay?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}

@@ -23,7 +23,7 @@ const spaceMono = Space_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
+  themeColor: "#0f0f1a",
 };
 
 export const metadata: Metadata = {

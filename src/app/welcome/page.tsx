@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 
 // Pixel star component
-function PixelStar({ size = 8, color = "#FFE66D", delay = 0 }: { size?: number; color?: string; delay?: number }) {
+function PixelStar({ size = 8, color = "#ffd700", delay = 0 }: { size?: number; color?: string; delay?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
