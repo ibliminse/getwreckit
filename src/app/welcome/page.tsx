@@ -87,7 +87,7 @@ function WelcomeContent() {
         >
           <span
             className="text-2xl font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             <span className="text-[var(--accent)]">WRECKIT</span>
           </span>
@@ -117,7 +117,7 @@ function WelcomeContent() {
           </div>
           <h1
             className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             You're on the list!
           </h1>
@@ -135,7 +135,7 @@ function WelcomeContent() {
           </div>
           <div
             className="text-5xl md:text-6xl font-bold text-[var(--accent)] mb-2"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             #{position.toLocaleString()}
           </div>

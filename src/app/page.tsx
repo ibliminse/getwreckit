@@ -114,7 +114,7 @@ function HomeContent() {
         >
           <span
             className="text-xl font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             <span className="text-[var(--accent)]">WRECKIT</span>
           </span>
@@ -139,7 +139,7 @@ function HomeContent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-4 leading-[1.1]"
-          style={{ fontFamily: "var(--font-space-grotesk)" }}
+          style={{ fontFamily: "var(--font-display)" }}
         >
           Free AI Coding Tools
         </motion.h1>
@@ -151,7 +151,7 @@ function HomeContent() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl text-[var(--text-secondary)] mb-8"
         >
-          Ship faster with AI. Zero cost. No limits.
+          Free AI coding tools. Built by AI. Powered by <span className="text-[var(--accent)] font-semibold">$WRECKIT</span>.
         </motion.p>
 
         {/* Email form */}
