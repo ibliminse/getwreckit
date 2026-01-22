@@ -181,7 +181,7 @@ function HomeContent() {
       </div>
       <div className="fixed bottom-40 left-0 w-full pointer-events-none">
         <div className="animate-race-left">
-          <PixelCar color="var(--bg-elevated)" />
+          <PixelCar color="#8b5cf6" />
         </div>
       </div>
 
