@@ -68,8 +68,12 @@ input:focus {
   font-family: var(--font-body), sans-serif;
 }
 
+.font-display {
+  font-family: var(--font-display), cursive;
+}
+
 .font-mono {
-  font-family: var(--font-mono), monospace;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
 }
 
 /* Racing car animation */
@@ -127,6 +131,20 @@ input:focus {
 
 .animate-glow {
   animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Logo shake animation (wreckit.cc style) */
+@keyframes logo-shake {
+  0%, 100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+.animate-logo-shake {
+  animation: logo-shake 0.5s ease-in-out infinite;
 }
 
 /* Scanline effect */

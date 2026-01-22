@@ -73,9 +73,9 @@ function WelcomeContent() {
 
   const shareTwitter = () => {
     const messages = [
-      `I'm #${position} on the WRECKIT waitlist.\n\nFree AI coding tools are coming. First 1,000 get lifetime access.\n\nDon't sleep on this:`,
+      `I'm #${position} on the WRECKIT waitlist.\n\nAI coding tools that ship. First 1,000 get lifetime access.\n\nDon't sleep on this:`,
       `Just secured my spot for free AI coding tools.\n\nWRECKIT is giving the first 1,000 users lifetime access.\n\nI'm #${position} in line. Get ahead of me:`,
-      `Devs are racing to get on the WRECKIT waitlist.\n\nFree AI coding tools. No catch.\n\nI'm #${position}. See you at the top:`,
+      `Devs are racing to get on the WRECKIT waitlist.\n\nAI coding tools that actually ship.\n\nI'm #${position}. See you at the top:`,
     ];
     const text = encodeURIComponent(messages[Math.floor(Math.random() * messages.length)]);
     window.open(

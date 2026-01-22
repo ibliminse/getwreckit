@@ -218,9 +218,9 @@ function HomeContent() {
           className="mb-8"
         >
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-pixel text-[var(--accent)] tracking-wider"
+            className="text-6xl md:text-8xl lg:text-9xl font-display text-[var(--accent)] tracking-wide animate-logo-shake"
             style={{
-              textShadow: "0 0 20px var(--accent), 0 0 40px var(--accent), 0 0 60px var(--accent)",
+              textShadow: "4px 4px 0 #FF4136, 8px 8px 0 rgba(0,0,0,0.3)",
             }}
           >
             WRECKIT
@@ -234,13 +234,13 @@ function HomeContent() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex flex-wrap justify-center gap-4 mb-8"
         >
-          <span className="px-6 py-3 bg-[var(--accent-secondary)] font-pixel text-[10px] text-white border-4 border-[var(--bg-dark)]">
+          <span className="px-4 py-2.5 bg-transparent font-pixel text-[9px] text-[var(--accent)] border border-[var(--accent)] rounded-sm">
             SHIP FASTER
           </span>
-          <span className="px-6 py-3 bg-[var(--accent)] font-pixel text-[10px] text-black border-4 border-[var(--bg-dark)]">
+          <span className="px-4 py-2.5 bg-transparent font-pixel text-[9px] text-[var(--accent)] border border-[var(--accent)] rounded-sm">
             GET SEEN
           </span>
-          <span className="px-6 py-3 bg-[var(--bg-elevated)] font-pixel text-[10px] text-[var(--accent)] border-4 border-[var(--accent)]">
+          <span className="px-4 py-2.5 bg-transparent font-pixel text-[9px] text-[var(--accent)] border border-[var(--accent)] rounded-sm">
             COMPOUND VALUE
           </span>
         </motion.div>
@@ -252,7 +252,7 @@ function HomeContent() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-2xl md:text-4xl font-semibold text-[var(--text-primary)] mb-4 leading-snug"
         >
-          Free AI coding tools that ship.
+          AI coding tools that ship.
         </motion.h2>
 
         {/* Subheadline */}

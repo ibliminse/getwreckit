@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { Press_Start_2P, Inter, Space_Mono } from "next/font/google";
+import { Press_Start_2P, Inter, Bangers } from "next/font/google";
 
 const pressStart2P = Press_Start_2P({
   weight: "400",
@@ -15,10 +15,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceMono = Space_Mono({
-  weight: ["400", "700"],
+const bangers = Bangers({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -28,11 +28,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "WRECKIT | The AI Coding Revolution",
-  description: "Free AI coding tools. Built by AI. Powered by $WRECKIT. Join the waitlist for early access.",
+  description: "AI coding tools that ship. Built by AI. Powered by $WRECKIT. Join the waitlist for early access.",
   metadataBase: new URL("https://getwreckit.xyz"),
   openGraph: {
     title: "WRECKIT | The AI Coding Revolution",
-    description: "Free AI coding tools. Built by AI. Powered by $WRECKIT.",
+    description: "AI coding tools that ship. Built by AI. Powered by $WRECKIT.",
     url: "https://getwreckit.xyz",
     siteName: "WRECKIT",
     type: "website",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "WRECKIT | The AI Coding Revolution",
-    description: "Free AI coding tools. Built by AI. Powered by $WRECKIT.",
+    description: "AI coding tools that ship. Built by AI. Powered by $WRECKIT.",
   },
 };
 
@@ -51,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pressStart2P.variable} ${inter.variable} ${spaceMono.variable} antialiased`}>
+      <body className={`${pressStart2P.variable} ${inter.variable} ${bangers.variable} antialiased`}>
         {children}
       </body>
     </html>
