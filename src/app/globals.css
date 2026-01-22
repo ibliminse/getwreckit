@@ -156,7 +156,7 @@ input:focus {
   padding: 16px 32px;
   font-family: var(--font-pixel), cursive;
   font-size: 10px;
-  color: white;
+  color: black;
   cursor: pointer;
   image-rendering: pixelated;
   box-shadow:
