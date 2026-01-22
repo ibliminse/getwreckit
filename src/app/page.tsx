@@ -218,9 +218,10 @@ function HomeContent() {
           className="mb-8"
         >
           <h1
-            className="text-6xl md:text-8xl lg:text-9xl font-display text-[var(--accent)] tracking-wide animate-logo-shake"
+            className="text-7xl md:text-9xl lg:text-[11rem] font-display text-[var(--accent)] tracking-[0.12em] animate-logo-shake"
             style={{
               textShadow: "4px 4px 0 #FF4136, 8px 8px 0 rgba(0,0,0,0.3)",
+              WebkitTextStroke: "2px #FF4136",
             }}
           >
             WRECKIT
@@ -232,15 +233,15 @@ function HomeContent() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-4 mb-8"
+          className="flex flex-wrap justify-center gap-8 mb-8"
         >
-          <span className="px-4 py-2.5 bg-transparent font-pixel text-[9px] text-[var(--accent)] border border-[var(--accent)] rounded-sm">
+          <span className="px-16 py-6 bg-transparent font-pixel text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             SHIP FASTER
           </span>
-          <span className="px-4 py-2.5 bg-transparent font-pixel text-[9px] text-[var(--accent)] border border-[var(--accent)] rounded-sm">
+          <span className="px-16 py-6 bg-transparent font-pixel text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             GET SEEN
           </span>
-          <span className="px-4 py-2.5 bg-transparent font-pixel text-[9px] text-[var(--accent)] border border-[var(--accent)] rounded-sm">
+          <span className="px-16 py-6 bg-transparent font-pixel text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             COMPOUND VALUE
           </span>
         </motion.div>
