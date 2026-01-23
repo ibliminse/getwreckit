@@ -4,13 +4,16 @@ import { kv } from "@vercel/kv";
 export async function POST(request: NextRequest) {
   // Auth via Authorization header or query param
   const authHeader = request.headers.get("authorization");
+  const querySecret = request.nextUrl.searchParams.get("secret");
   const adminSecret = process.env.ADMIN_SECRET;
 
   const headerSecret = authHeader?.startsWith("Bearer ")
     ? authHeader.slice(7)
     : authHeader;
 
-  if (!adminSecret || headerSecret !== adminSecret) {
+  const providedSecret = headerSecret || querySecret;
+
+  if (!adminSecret || providedSecret !== adminSecret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
