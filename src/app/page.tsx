@@ -145,15 +145,15 @@ function HomeContent() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-8 mb-8"
+          className="flex flex-wrap justify-center gap-3 md:gap-8 mb-10 md:mb-8"
         >
-          <span className="px-16 py-6 bg-transparent font-pixel text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
+          <span className="px-4 py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             SHIP FASTER
           </span>
-          <span className="px-16 py-6 bg-transparent font-pixel text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
+          <span className="px-4 py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             GET SEEN
           </span>
-          <span className="px-16 py-6 bg-transparent font-pixel text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
+          <span className="px-4 py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             COMPOUND VALUE
           </span>
         </motion.div>
@@ -163,7 +163,7 @@ function HomeContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-2xl md:text-4xl font-semibold text-[var(--text-primary)] mb-4 leading-snug"
+          className="text-2xl md:text-4xl font-semibold text-[var(--text-primary)] mb-6 md:mb-4 leading-snug"
         >
           AI coding tools that ship.
         </motion.h2>
@@ -173,7 +173,7 @@ function HomeContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-base md:text-lg text-[var(--text-secondary)] mb-8"
+          className="text-base md:text-lg text-[var(--text-secondary)] mb-10 md:mb-8"
         >
           Built by AI. Powered by{" "}
           <span className="text-[var(--accent)] font-semibold">$WRECKIT</span>.
