@@ -145,15 +145,15 @@ function HomeContent() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 md:gap-8 mb-10 md:mb-8"
+          className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8 mb-8 md:mb-8"
         >
-          <span className="px-4 py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
+          <span className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[7px] sm:text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             SHIP FASTER
           </span>
-          <span className="px-4 py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
+          <span className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[7px] sm:text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             GET SEEN
           </span>
-          <span className="px-4 py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
+          <span className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3 bg-transparent font-pixel text-[7px] sm:text-[8px] md:text-[10px] text-[var(--accent)] border border-[var(--accent)]/50 rounded-md">
             COMPOUND VALUE
           </span>
         </motion.div>
