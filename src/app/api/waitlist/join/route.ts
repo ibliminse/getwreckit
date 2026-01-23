@@ -1,20 +1,70 @@
 import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 
+// Rate limiting: 5 join attempts per IP per hour
+const rateLimits = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = 5;
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimits.get(ip);
+
+  if (!record || now > record.resetAt) {
+    rateLimits.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    return false;
+  }
+
+  if (record.count >= RATE_LIMIT) {
+    return true;
+  }
+
+  record.count++;
+  return false;
+}
+
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("x-vercel-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown"
+  );
+}
+
 function generateReferralCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const randomBytes = crypto.getRandomValues(new Uint8Array(8));
   let code = "";
   for (let i = 0; i < 8; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
+    code += chars.charAt(randomBytes[i] % chars.length);
   }
   return code;
 }
 
+// RFC 5322 compliant email regex (simplified but strict)
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+function isValidEmail(email: string): boolean {
+  if (!email || typeof email !== "string") return false;
+  if (email.length > 254) return false; // Max email length per RFC
+  return EMAIL_REGEX.test(email);
+}
+
 export async function POST(request: NextRequest) {
+  // Rate limit check
+  const ip = getClientIp(request);
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   try {
     const { email, referredBy } = await request.json();
 
-    if (!email || !email.includes("@")) {
+    if (!isValidEmail(email)) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
